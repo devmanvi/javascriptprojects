@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        .numbers{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows:repeat(4,1fr) ;
+            top: 120px;
+            position: relative;
+            gap: 10px;
+
+        }
+        .btn{
+           display: flex;
+           flex: 3;
+           position: relative;
+           top: 130px;
+           gap: 10px;
+
+        }
+
+        .btn>button{
+            flex: 3;
+            font-size: 1.3rem;
+        }
+        
+        .num{
+            font-size: 1.3rem;
+        }
+
+        .oper{
+            font-size: 1.3rem;
+        }
+
+        .disp{
+            height: 50px;
+        }
+        </style>
+</head>
+<body>
+    <div  > <h2 class="disp"></h2></div>
+    <div class="numbers">
+        <button class="oper">+</button>
+        <button class="oper">-</button>
+        <button class="oper">*</button>
+        <button class="oper">/</button>
+        <button class="num">0</button>
+        <button class="num">1</button>
+        <button class="num">2</button>
+        <button class="num">3</button> 
+        <button class="num">4</button>
+        <button class="num">5</button>
+        <button class="num">6</button>
+        <button class="num">7</button>
+        <button class="num">8</button>
+        <button class="num">9</button>
+        
+        
+        
+    </div>
+    <div class="btn">
+        <button onclick="res1()">res</button>
+        <button onclick="clr_nu()">clear</button>
+        <button onclick="delete_number()">delete</button>
+    </div>
+    <script>
+        const disp=document.querySelector(".disp")
+        let val=''
+        let fval=0
+        let oprands=''
+
+                let result=val.split("+")
+                
+                
+                
+                // function res(){
+                    //     fval=0  
+                    //     result=val.split("+")
+                    //     if(result.length>1){
+                        //         for(i=0;i<result.length;i++){
+        //             fval+=parseInt(result[i])
+        //             // console.log(result[i]);
+        //         }
+        // }
+        //     disp.innerText=fval
+        
+        //     fir_val()
+        //     disp.innerText=fval
+        // }
+        // function fir_val(){
+            
+         
+        //     }
+
+            function res1(){
+                result=val.split(/[+-/*]+/)
+                // console.log(result);
+                
+                // fir_val()
+                switch(oprands[0]){
+                    
+                    case '+':fval=parseInt(result[0])+parseInt(result[1])
+                    console.log('hi');
+                    break
+                    case '-':fval=parseInt(result[0])-parseInt(result[1])
+                    break   
+                    case '*':fval=parseInt(result[0])*parseInt(result[1])
+                    break  
+                    case '/':fval=Math.floor(parseInt(result[0])/parseInt(result[1]))
+                    break                   
+                     }
+
+                if(oprands.length>1){
+                    for(i=1;i<oprands.length;i++){
+                        console.log(fval);
+                        switch(oprands[i]){
+                            case '+':fval+=parseInt(result[i+1])
+                                    break;
+                            case '-':fval-=parseInt(result[i+1])
+                                    break;
+                            case '*':fval*=parseInt(result[i+1])
+                                    break;
+                            case '/':fval=Math.floor(fval/parseInt(result[i+1]))
+                                    break;        
+                                }
+                            }
+            }    
+                        oprands=''
+                        disp.innerText=fval
+                        val=fval.toString()
+                        // console.log(fval,val);
+                    }
+                    
+        const num=document.querySelectorAll(".num")
+        const oper=document.querySelectorAll(".oper")
+            // num.addEventListener('click',clicking_btn)
+            // console.log(num);
+        for(let a of num){
+                a.onclick = clicking_btn;
+                // console.log(a.onclick);
+                    }
+        
+        function clicking_btn(e){
+        //    console.log(e);
+        val += e.target.innerText;
+        disp.innerText= val; 
+    }
+    
+    for(let a of oper){
+        a.onclick=add_opr;
+        // console.log(o);
+    }
+   
+    function add_opr(e){
+        // console.log('hi');
+        val+=e.target.innerText;
+        disp.innerText=val
+        oprands+=e.target.innerText;
+    
+    }
+    
+    function delete_number(){
+        del=val.length-1
+        if(val[del]=='+' || val[del]=='-' || val[del]=='*' || val[del]=='/'){
+            oprands=oprands.slice(0,oprands.length-1)
+        }
+        val=val.slice(0,del)
+        // val=val.replace(del,"")
+        disp.innerText=val
+        
+    }
+
+    function clr_nu(){
+        disp.innerText=''
+        val=''
+        oprands=''
+    }
+   
+            </script>
+</body>
+</html>
