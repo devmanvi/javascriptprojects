@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div><input type="text" class="user_input"  onchange="update()">
+        <p class="words"></p>
+    </div>
+    <script>
+        let words=document.querySelector('.words')
+        let objs={1:' eleven',2:' twelve',3:' thirteen',4:' fourteen',5:" fifteen",6:' sixteen',7:' seventten',8:' eighteen',9:' nineteen',0:' ten'}
+        let obj1={1:' one',2:' two',3:' three',4:' four',5:' five',6:' six',7:' seven',8:' eight',9:' nine',10:' ten',11:' eleven',12:" twelve",20:" twenty",21:' twenty one',22:' twenty two'}
+        let num2={2:' twenty',3:' thirty',4:' fourty',5:' fifty',6:' sixty',7:' seventy',8:' eighty',9:' ninety'}
+        let obj2={1:' one hundred',2:' two hundred',3:' three hundred',4:' fourhundred',5:' five hundred',6:' six hundred',7:' seven hundred',8:' eight hundred',9:' nine hundred'}
+        let obj3={1:'one thousand',2:'two thousand',3:'three thousand',4:'four thousand',5:'five thousand',6:'six thousand',7:'seven thousand',8:'eight thousand',9:'nine thousand'}
+        let num=''
+        let answer=''        
+        
+             function spl(){
+                    let ans=Object.keys(objs)
+                    let spl_tmp=num[num.length-1]
+                    let val=ans.find(element=>{
+                        if(spl_tmp==element){
+                            answer+=objs[element]
+                            // console.log(objs[element]);
+                        }
+                    })
+                }
+
+        function tens(tmp){
+            let ans=Object.keys(num2)
+            if(tmp==1){
+                spl()
+                
+            }
+            let val=ans.find(element=>{
+                if(tmp==element && tmp!=1){
+                    answer+=num2[element]
+                    // console.log(num2[element]);
+                }
+            })
+        }
+        function units(tmp1){
+            t_val=num.length-2
+            if(num[t_val]!=1){
+                let ans=Object.keys(obj1)
+                // console.log(ans);
+                let val=ans.find(element=>{
+                    if(tmp1==element){
+                        answer+=obj1[element]
+                        // console.log(ans);
+                    }
+                })
+        }
+        }
+        
+        function hundred(tmp2){
+            let ans=Object.keys(obj2)
+            // console.log(ans);
+            let val=ans.find(element=>{
+                if(tmp2==element){
+                    answer+=obj2[element]
+                    // console.log(obj2[element]);
+                }
+            })
+        }
+        
+        function thousands(tmp3){
+            let ans=Object.keys(obj3)
+            // console.log(ans);
+            let val=ans.find(element=>{
+                if(tmp3==element){
+                    answer+=obj3[element]
+                    // console.log(obj3[element]);
+                }
+            })
+        }
+        
+       
+                let arr2=[thousands,hundred,tens,units]
+                // let arr2=[obj3,obj2,num2,obj1]
+                let temp=[]
+                let temp2=arr2.length-num.length
+               
+                
+                function update(){
+                    let user_input= document.querySelector(".user_input").value;
+                    num=user_input
+                    temp2=arr2.length-num.length
+                    output(num)
+                    words.innerText=answer
+                    console.log(answer);
+                    // user_input=user_input.value
+                    // console.log(user_input);
+                }
+
+                function output(gval){
+                    answer=''
+                    for(i=0;i<gval.length;i++){
+                        temp=arr2.slice(temp2)
+                        temp[i](num[i])
+                        // console.log(temp);
+                        // numbers(temp[i],num[i])
+                }
+                }
+                </script>
+</body>
+</html>
